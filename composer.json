@@ -1,0 +1,36 @@
+{
+    "name": "trumvc/framework",
+    "description": "The Core Code for TruMVC framework",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hilkiah Makemo",
+            "email": "hilkiah.makemo@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^2.4",
+        "zendframework/zend-diactoros": "^1.7",
+        "php-di/php-di": "^5.4",
+        "nikic/fast-route": "^1.2"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^4.0",
+        "maximebf/debugbar": "^1.15",
+        "phpunit/phpunit": "^7.0@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "TruMVC\\": "src/"
+        },
+        "files": [
+            "autoload.php"
+        ]
+    },
+    "config": {
+        "vendor-dir": "../../"
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+}
