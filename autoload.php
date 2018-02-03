@@ -6,17 +6,19 @@ $Loader = function($DIR) use(&$Loader)
 {
     $DS = DIRECTORY_SEPARATOR;
 
-    $Paths = glob($DIR.$DS."*.php", GLOB_NOSORT);
+    $Paths = glob($DIR.$DS."*", GLOB_NOSORT);
 
     foreach ($Paths as $path) {
 
-        if(is_dir($path)){
+        if(strpos($path, '.php') !== false){
+            require_once $path;
+        } elseif(is_dir($path)) {
             $Loader($path);
         } else {
-            require_once $path;
-        }
+            continue;
+        }       
     }
 
 };
 
-$Loader(dirname(__FILE__));
+$Loader( dirname(__FILE__) );

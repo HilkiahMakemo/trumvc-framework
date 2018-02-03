@@ -5,12 +5,10 @@ use FastRoute\RouteCollector;
 
 class Routing extends RouteCollector
 {
-    private $router, $routes = [];
+    private $routes = [];
 
-    public function __construct($router)
+    public function __construct($routes)
     {
-        $this->router = $router;
-        $routes = glob($this->router."*.php", GLOB_NOSORT);
 
         foreach($routes as $route){
             $this->routes[] = $this->setRoutes($route);

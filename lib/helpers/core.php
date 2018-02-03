@@ -2,11 +2,12 @@
 
 use TruMVC\Core\Application;
 
-$App = Application::instance();
 
 if(!function_exists('app')){
     function app($name, $handler = null)
     {
+        $App = Application::instance();
+        
         if(empty($handler)){
             return $App->get($name);
         }
