@@ -33,7 +33,7 @@ class Application extends ContainerBuilder
 
     public function response()
     {
-        dump($this);
+        dump($this->get('routing'));
     }
 
 }

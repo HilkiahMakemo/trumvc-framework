@@ -2,34 +2,20 @@
 
 namespace TruMVC\Core;
 
-class Configurator implements \ArrayAccess
+class Configurator extends Collection
 {
     protected $configs = [];
 
     public function __construct($configs = [])
     {
         foreach($configs as $config){
-            $this->configs[] = require $config;
+            $name = str_replace('.php', '', basename($config));
+            
+            $value = json_decode(json_encode(require $config));
+            
+            $this->configs[$name] = $value;
         }
     }
 
-    public function offsetExists($name)
-    {
-        return array_key_exists($name, $this->configs);
-    } 
-
-    public function offsetGet($name)
-    {
-        return $this->configs[$name];
-    }
-
-    public function offsetSet($name, $value)
-    {
-        $this->configs[$name] = $value;
-    }
-
-    public function offsetUnSet($name)
-    {
-        unset($this->configs[$name]);
-    }
+    
 }
