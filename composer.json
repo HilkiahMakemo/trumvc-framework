@@ -9,7 +9,14 @@
             "email": "hilkiah.makemo@gmail.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:HilkiahMakemo/trumvc-framework.git"
+        }
+    ],
     "require": {
+        "trumvc/framework": "dev-master",
         "twig/twig": "^2.4",
         "zendframework/zend-diactoros": "^1.7",
         "php-di/php-di": "^5.4",
