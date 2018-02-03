@@ -16,7 +16,6 @@
         }
     ],
     "require": {
-        "trumvc/framework": "dev-master",
         "twig/twig": "^2.4",
         "zendframework/zend-diactoros": "^1.7",
         "php-di/php-di": "^5.4",
