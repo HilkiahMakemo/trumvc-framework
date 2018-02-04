@@ -14,23 +14,44 @@ class Routing extends RouteCollector
         $this->router = RouteCollector::class;
 
         foreach($routes as $route){
-            $r = $this->setRoutes($route);
+            $name = pathinfo($route, PATHINFO_FILENAME);
 
-            if(is_int($r)) continue;
+            $r = $this->setRoutes($route, $this->routes);
 
-            $this->routes[] = $r;
-        }        
-        
+            if(is_int($r) || is_null($r)) continue;
 
-        dump($this);
+            $this->routes[$name] = $r;
+        } 
     }
 
-    public function setRoutes($route)
+    public function setRoutes($route, $arr = [])
     {
-        if(is_dir($route)) 
-            $this->setRoutes($route);
-        else 
-            return require $route;
+        if(is_dir($route)){ 
+            $this->setRoutes($route, $arr);
+        } 
+        elseif(Str($route)->contains('.json')) {
+            $arr = $this->parseJson($route);
+        }
+        elseif(Str($route)->endsWith('.php')) {
+            $arr = $this->parseArray($route);
+        }
+        return $arr;
+    }
+
+    public function parseJson($string)
+    {
+        $json = file_get_contents($string);
+        return json_decode($json, true);
+    }
+
+    public function parseArray($string)
+    {
+        return require $string;
+    }
+
+    public function parseYaml()
+    {
+        # code...
     }
 
     public function getRoutes()
@@ -42,6 +63,7 @@ class Routing extends RouteCollector
 
     public function dispatch(Closure $router)
     {
+        dump($this->routes);
         return \FastRoute\simpleDispatcher($router);         
     }
 }
